@@ -1,5 +1,6 @@
-from fastapi import APIRouter, status, Response
+from fastapi import APIRouter, status, Response, Depends
 from typing import Optional
+from router.blog_post import required_functionality
 
 router = APIRouter(
     prefix='/blog',
@@ -8,8 +9,8 @@ router = APIRouter(
 
 
 @router.get("/{id}/comment/{comment_id}", tags = ['blog', 'comment'])
-def blog_with_comments(id: int, comment_id: int, valid: bool = True, username: Optional[str] = None):
-    return {"message": f"Blog_id {id}, comment {comment_id}, valid {valid} of username {username}"}
+def blog_with_comments(id: int, comment_id: int, valid: bool = True, username: Optional[str] = None, required_param: dict = Depends(required_functionality)):
+    return {"message": f"Blog_id {id}, comment {comment_id}, valid {valid} of username {username}, {required_param}"}
 
 
 @router.get("/all")
