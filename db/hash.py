@@ -7,4 +7,4 @@ class Hash:
         return password_context.hash(password)
     
     def verify(hashed_password, plain_password):
-        return password_context.verify(hashed_password, plain_password)
+        return password_context.verify(plain_password, hashed_password)
